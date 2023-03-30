@@ -104,7 +104,7 @@ public class ContactServiceImpl implements ContactService {
     }
 
 
-    public ContactDao updateContact(ContactDao contactDao, String id) {
+    public ContactDao updateContact(ContactDao contactDao, String id){
 
         Contact contact = repository.findById(id).orElseThrow(() -> new NoSuchContactsExistException("No ContactFound for ID:" + id));
         log.info("Updating parts by ID: " + id);
@@ -117,7 +117,7 @@ public class ContactServiceImpl implements ContactService {
 
     }
 
-    public void deleteContact(String id) {
+    public void deleteContact(String id){
         repository.findById(id).orElseThrow(() -> new NoSuchContactsExistException("No Contact Found for ID:" + id));
         log.error("Deleting Parts By ID" + id);
         repository.deleteById(id);

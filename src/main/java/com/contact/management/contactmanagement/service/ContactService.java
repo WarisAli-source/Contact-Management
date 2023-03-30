@@ -11,4 +11,7 @@ public interface ContactService {
     public List<ContactDao> getContactByFirstName(String firstName);
     public List<ContactDao> getContactByLastName(String lastName);
     public List<ContactDao> getContactByEmail(String email);
+    public ContactDao updateContact(ContactDao contactDao, String id);
+    public void deleteContact(String id);
+
 }
