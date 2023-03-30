@@ -65,4 +65,24 @@ public class ContactController {
         }
         return new ResponseEntity<>(contactDaoList, HttpStatus.OK);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ContactDao> updatePart(@PathVariable String id, @RequestBody ContactDao contactDao) {
+        log.info("Parts Updated");
+        ContactDao parts = service.updateContact(contactDao, id);
+        if (parts == null) {
+            throw new NoSuchContactsExistException("Contacts Not Found");
+        } else {
+            return new ResponseEntity<>(contactDao, HttpStatus.OK);
+        }
+
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletePart(@PathVariable String id) {
+        log.info("Parts Deleted");
+        service.deleteContact(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
+    }
 }

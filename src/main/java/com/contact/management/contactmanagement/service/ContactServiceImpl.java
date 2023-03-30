@@ -102,4 +102,25 @@ public class ContactServiceImpl implements ContactService {
         return contactDaoList;
 
     }
+
+
+    public ContactDao updateContact(ContactDao contactDao, String id) {
+
+        Contact contact = repository.findById(id).orElseThrow(() -> new NoSuchContactsExistException("No ContactFound for ID:" + id));
+        log.info("Updating parts by ID: " + id);
+
+        BeanUtils.copyProperties(contactDao, contact);
+
+        log.info("Parts Updated by ID: " + contactDao.getId());
+        Contact parts = repository.save(contact);
+        return contactDao;
+
+    }
+
+    public void deleteContact(String id) {
+        repository.findById(id).orElseThrow(() -> new NoSuchContactsExistException("No Contact Found for ID:" + id));
+        log.error("Deleting Parts By ID" + id);
+        repository.deleteById(id);
+
+    }
 }
